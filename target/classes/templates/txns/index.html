@@ -1,0 +1,48 @@
+<!-- 
+Name: Bonita Li
+Assignment: Assignment 3
+Date: July 31, 2022
+
+Description: List of transaction that were made for all events.
+ -->
+ 
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>WeHelp: Add Transaction</title>
+<link rel="stylesheet" href="../css/stylesheet.css" th:href="@{/css/stylesheet.css}">	
+</head>
+<body>
+
+		<header>
+			<h1>WeHelp Charity Events</h1>
+			<h2>List Transactions</h2>
+			<nav>
+				<a th:href="@{/}">Home</a>
+				<a th:href="@{/add}">Add</a>
+			</nav>
+	</header>
+	
+	<h3>Transactions</h3>
+	
+	<!-- Shows text when no transactions. -->
+	<div class="warn" th:if="${rows <= 0}" th:text="'No transactions to view.'">No transactions to view.</div>
+	
+	<!-- Displays all transactions made for all events -->
+	<table th:if="${rows > 0}">
+
+		<tr><th>Event</th><th>#Tickets</th><th>Contact</th></tr>
+		<tr th:each="t : ${transactions}">
+			<td th:text="${events[t.event]}">event name</td>
+			<td th:text="${t.numTickets}">number of tickets</td>
+			<td th:text="${t.contact}">contact info</td>
+		</tr>
+	</table>
+		
+	<footer>
+		<address>&copy; 2022 Wendi Jollymore</address>
+	</footer>
+	
+</body>
+</html>

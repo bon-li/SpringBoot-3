@@ -1,0 +1,45 @@
+<!-- 
+Name: Bonita Li
+Assignment: Assignment 3
+Date: July 31, 2022
+
+Description: Main index page for viewing upcoming charity events.
+ -->
+ 
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>WeHelp Charity Events: Welcome</title>
+<link rel="stylesheet" href="../css/stylesheet.css" th:href="@{/css/stylesheet.css}">	
+</head>
+<body>
+
+	<header>
+		<h1>WeHelp Charity Events</h1>
+		<h2>Welcome</h2>
+		<nav>
+			<a th:href="@{/add}">Add</a>
+			<a th:href="@{/list}">Transactions</a>
+		</nav>
+	</header>
+	
+	<h3>Current Events</h3>
+	
+	<!-- Shows text when there are no events -->
+	<div th:if="${#maps.isEmpty(session)}" th:text="'There are no upcoming events.'">There are no upcoming events.</div>
+	
+	<!-- Lists all events -->
+	<table class="event-list" th:unless="${#maps.isEmpty(session)}">
+		<tr><th>Event Name</th><th>Ticket Price</th></tr>
+		<tr th:each="e : ${session.events}">
+			<td th:text="${e.eventName}">event name</td>
+			<td th:text="'$'+${#numbers.formatDecimal(e.ticketCost,1,2)}">ticket cost</td>
+		</tr>
+	</table>
+	
+	<footer>
+		<address>&copy; 2022 Wendi Jollymore</address>
+	</footer>
+</body>
+</html>
